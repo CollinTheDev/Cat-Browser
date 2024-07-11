@@ -9,8 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const a = document.createElement('a');
             a.href = '#';
             a.textContent = fav;
-            a.addEventListener('click', () => {
-                window.open(fav, '_blank'); // Open favorite in a new tab
+            a.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default anchor behavior
+                const iframe = window.parent.document.getElementById('webpage');
+                if (iframe) {
+                    iframe.src = fav;
+                }
             });
             li.appendChild(a);
             favoritesList.appendChild(li);
