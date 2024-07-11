@@ -3,11 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const goButton = document.getElementById('go');
     const backButton = document.getElementById('back');
     const forwardButton = document.getElementById('forward');
+    const addFavoriteButton = document.getElementById('add-favorite');
     const iframe = document.getElementById('webpage');
     const errorMessage = document.getElementById('error-message');
+    const favoritesList = document.getElementById('favorites-list');
+    const favoritesContainer = document.getElementById('favorites');
 
     let historyStack = [];
     let currentHistoryIndex = -1;
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     const loadURL = (url) => {
         if (!url.startsWith('http://') && !url.startsWith('https://')) {
@@ -24,6 +28,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         historyStack.push(url);
         currentHistoryIndex++;
+    };
+
+    const updateFavorites = () => {
+        favoritesList.innerHTML = '';
+        favorites.forEach(fav => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = '#';
+            a.textContent = fav;
+            a.addEventListener('click', () => {
+                loadURL(fav);
+                updateHistory(fav);
+            });
+            li.appendChild(a);
+            favoritesList.appendChild(li);
+        });
+        if (favorites.length > 0) {
+            favoritesContainer.classList.remove('hidden');
+        } else {
+            favoritesContainer.classList.add('hidden');
+        }
     };
 
     goButton.addEventListener('click', () => {
@@ -43,6 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentHistoryIndex < historyStack.length - 1) {
             currentHistoryIndex++;
             loadURL(historyStack[currentHistoryIndex]);
+        }
+    });
+
+    addFavoriteButton.addEventListener('click', () => {
+        const url = urlInput.value;
+        if (url && !favorites.includes(url)) {
+            favorites.push(url);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            updateFavorites();
         }
     });
 
@@ -67,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.classList.add('hidden');
     });
 
-    // Load initial blank page
+    // Load initial blank page and favorites
     loadURL('about:blank');
+    updateFavorites();
 });
