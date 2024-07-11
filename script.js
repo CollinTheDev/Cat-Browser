@@ -15,6 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     const loadURL = (url) => {
+        if (url === 'https://cat-browser.cat') {
+            welcomePage.classList.remove('hidden');
+            iframe.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            return;
+        }
+
         if (!url.startsWith('http://') && !url.startsWith('https://')) {
             url = 'http://' + url;
         }
