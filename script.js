@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const iframe = document.getElementById('webpage');
     const errorMessage = document.getElementById('error-message');
     const favoritesList = document.getElementById('favorites-list');
-    const favoritesContainer = document.getElementById('favorites');
+    const favoritesPage = document.getElementById('favorites-page');
     const welcomePage = document.getElementById('welcome-page');
 
     let historyStack = [];
@@ -17,8 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadURL = (url) => {
         if (url === 'https://cat-browser.cat') {
             welcomePage.classList.remove('hidden');
+            favoritesPage.classList.add('hidden');
             iframe.classList.add('hidden');
             errorMessage.classList.add('hidden');
+            return;
+        }
+
+        if (url === 'https://cat-browser/favorites') {
+            favoritesPage.classList.remove('hidden');
+            welcomePage.classList.add('hidden');
+            iframe.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            updateFavorites();
             return;
         }
 
@@ -29,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         urlInput.value = url;
         errorMessage.classList.add('hidden');
         welcomePage.classList.add('hidden');
+        favoritesPage.classList.add('hidden');
         iframe.classList.remove('hidden');
     };
 
@@ -54,11 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
             li.appendChild(a);
             favoritesList.appendChild(li);
         });
-        if (favorites.length > 0) {
-            favoritesContainer.classList.remove('hidden');
-        } else {
-            favoritesContainer.classList.add('hidden');
-        }
     };
 
     goButton.addEventListener('click', () => {
