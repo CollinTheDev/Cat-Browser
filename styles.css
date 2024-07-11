@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.browser {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: #f0f0f0;
+}
+
+.nav-button {
+    padding: 5px 10px;
+    margin-right: 5px;
+}
+
+#url {
+    flex-grow: 1;
+    padding: 5px;
+}
+
+iframe {
+    flex-grow: 1;
+    width: 100%;
+    border: none;
+}
