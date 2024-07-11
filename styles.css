@@ -63,30 +63,30 @@ iframe {
     display: none;
 }
 
-.favorites {
+#favorites-page {
     padding: 20px;
     background: #f0f0f0;
     border-top: 1px solid #ccc;
 }
 
-.favorites h2 {
+#favorites-page h2 {
     margin: 0 0 10px;
 }
 
-.favorites ul {
+#favorites-page ul {
     list-style: none;
     padding: 0;
 }
 
-.favorites li {
+#favorites-page li {
     padding: 5px 0;
 }
 
-.favorites a {
+#favorites-page a {
     text-decoration: none;
     color: #333;
 }
 
-.favorites a:hover {
+#favorites-page a:hover {
     text-decoration: underline;
 }
