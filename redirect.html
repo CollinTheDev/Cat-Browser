@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Redirection Setup</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>Domain Redirection Setup</h1>
+        <a href="index.html">Back to Browser</a>
+    </header>
+    <main>
+        <form id="domain-form">
+            <input type="text" id="domain-name" placeholder="example.cat" required>
+            <input type="text" id="domain-ip" placeholder="http://192.168.1.1" required>
+            <button type="submit">Set Domain</button>
+        </form>
+    </main>
+    <script>
+        const form = document.getElementById('domain-form');
+        const domainInput = document.getElementById('domain-name');
+        const ipInput = document.getElementById('domain-ip');
+
+        // Simulate a simple "DNS" using localStorage
+        const domains = JSON.parse(localStorage.getItem('domains')) || {};
+
+        // Handle form submission
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const domain = domainInput.value.trim().toLowerCase();
+            const ip = ipInput.value.trim();
+
+            // Store domain and IP in localStorage
+            domains[domain] = ip;
+            localStorage.setItem('domains', JSON.stringify(domains));
+
+            alert(`Domain ${domain} has been set to ${ip}`);
+        });
+
+        // Redirect based on domain input (simulate domain resolution)
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const domain = urlParams.get('domain');
+            
+            if (domain && domains[domain]) {
+                window.location.href = domains[domain];
+            }
+        });
+    </script>
+</body>
+</html>
