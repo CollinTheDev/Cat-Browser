@@ -15,14 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     const loadURL = (url) => {
-        // Handle the special URL for the welcome page
-        if (url === 'https://cat-browser.cat' || url === 'https://cat-browser.cat/') {
-            welcomePage.classList.remove('hidden');
-            favoritesPage.classList.add('hidden');
-            iframe.classList.add('hidden');
-            errorMessage.classList.add('hidden');
-            return;
-        }
+        // Normalize the URL to handle different cases
+        url = url.toLowerCase().trim();
 
         // Handle the special URL for the favorites page
         if (url === 'https://favorites.cat-browser.cat' || url === 'https://favorites.cat-browser.cat/') {
@@ -34,7 +28,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Handle other URLs
+        // Handle the special URL for the welcome page
+        if (url === 'https://cat-browser.cat' || url === 'https://cat-browser.cat/') {
+            welcomePage.classList.remove('hidden');
+            favoritesPage.classList.add('hidden');
+            iframe.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            return;
+        }
+
+        // Load other URLs
         if (!url.startsWith('http://') && !url.startsWith('https://')) {
             url = 'http://' + url;
         }
@@ -121,7 +124,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Load initial welcome page and favorites
-    welcomePage.classList.remove('hidden');
-    iframe.classList.add('hidden');
-    updateFavorites();
+    loadURL('https://cat-browser.cat');  // Initial load to show the welcome page
 });
