@@ -1,92 +1,95 @@
+/* General styling for the entire application */
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-}
-
-.browser {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-.navbar {
-    display: flex;
-    align-items: center;
-    padding: 5px;
+    margin: 0;
+    padding: 0;
     background-color: #f0f0f0;
+    color: #333;
 }
 
-.nav-button {
-    padding: 5px 10px;
-    margin-right: 5px;
+header {
+    background-color: #282c34;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
-#url {
-    flex-grow: 1;
-    padding: 5px;
+header h1 {
+    margin: 0;
 }
 
-.content {
-    flex-grow: 1;
-    position: relative;
+header input[type="text"] {
+    padding: 8px;
+    width: 60%;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+header button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #61dafb;
+    color: white;
+    cursor: pointer;
+}
+
+header button:hover {
+    background-color: #21a1f1;
+}
+
+header a {
+    color: #61dafb;
+    text-decoration: none;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 80px 20px 20px; /* Offset by header height */
 }
 
 iframe {
     width: 100%;
-    height: 100%;
+    height: 80vh;
     border: none;
 }
 
-#welcome-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    text-align: center;
-}
-
 #error-message {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border: 1px solid red;
     color: red;
-    text-align: center;
+    margin-top: 10px;
 }
 
 .hidden {
     display: none;
 }
 
-#favorites-page {
-    padding: 20px;
-    background: #f0f0f0;
-    border-top: 1px solid #ccc;
-}
-
-#favorites-page h2 {
-    margin: 0 0 10px;
-}
-
-#favorites-page ul {
+/* Styles for the favorites page */
+#favorites-list {
     list-style: none;
     padding: 0;
 }
 
-#favorites-page li {
-    padding: 5px 0;
+#favorites-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
-#favorites-page a {
+#favorites-list li a {
+    color: #61dafb;
     text-decoration: none;
-    color: #333;
+    font-size: 16px;
 }
 
-#favorites-page a:hover {
+#favorites-list li a:hover {
     text-decoration: underline;
 }
