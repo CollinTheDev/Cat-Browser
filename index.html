@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Browser</title>
+    <title>Cat Browser</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,12 +11,16 @@
         <div class="navbar">
             <button id="back" class="nav-button">⬅️</button>
             <button id="forward" class="nav-button">➡️</button>
-            <input type="text" id="url" placeholder="Enter URL">
+            <input type="text" id="url" placeholder="Enter URL" value="https://cat-browser.cat">
             <button id="go" class="nav-button">Go</button>
             <button id="add-favorite" class="nav-button">⭐</button>
         </div>
         <div class="content">
-            <iframe id="webpage" src="about:blank"></iframe>
+            <iframe id="webpage"></iframe>
+            <div id="welcome-page">
+                <h1>Welcome to Cat Browser</h1>
+                <p>Your favorite browser for browsing cat-related content!</p>
+            </div>
             <div id="error-message" class="hidden">This site cannot be embedded in an iframe.</div>
             <div id="favorites" class="favorites hidden">
                 <h2>Favorites</h2>
