@@ -14,7 +14,10 @@
             <input type="text" id="url" placeholder="Enter URL">
             <button id="go" class="nav-button">Go</button>
         </div>
-        <iframe id="webpage" src="about:blank"></iframe>
+        <div class="content">
+            <iframe id="webpage" src="about:blank"></iframe>
+            <div id="error-message" class="hidden">This site cannot be embedded in an iframe.</div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
