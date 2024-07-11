@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (url === 'https://cat-browser/favorites') {
+        if (url === 'https://favorites.cat-browser') {
             favoritesPage.classList.remove('hidden');
             welcomePage.classList.add('hidden');
             iframe.classList.add('hidden');
