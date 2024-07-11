@@ -37,6 +37,15 @@ iframe {
     border: none;
 }
 
+#welcome-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
 #error-message {
     display: none;
     position: absolute;
