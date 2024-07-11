@@ -53,3 +53,31 @@ iframe {
 .hidden {
     display: none;
 }
+
+.favorites {
+    padding: 20px;
+    background: #f0f0f0;
+    border-top: 1px solid #ccc;
+}
+
+.favorites h2 {
+    margin: 0 0 10px;
+}
+
+.favorites ul {
+    list-style: none;
+    padding: 0;
+}
+
+.favorites li {
+    padding: 5px 0;
+}
+
+.favorites a {
+    text-decoration: none;
+    color: #333;
+}
+
+.favorites a:hover {
+    text-decoration: underline;
+}
