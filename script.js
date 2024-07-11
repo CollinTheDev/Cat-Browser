@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let historyStack = [];
     let currentHistoryIndex = -1;
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
+    let domains = JSON.parse(localStorage.getItem('domains')) || {};
 
     const loadURL = (url) => {
         if (url === 'https://favorites.cat-browser.cat' || url === 'https://favorites.cat-browser.cat/') {
@@ -25,6 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!url.startsWith('http://') && !url.startsWith('https://')) {
             url = 'http://' + url;
         }
+
+        // Check if the URL matches a custom domain
+        const domain = new URL(url).hostname;
+        if (domains[domain]) {
+            url = domains[domain];
+        }
+
         iframe.src = url;
         urlInput.value = url;
         errorMessage.classList.add('hidden');
@@ -61,8 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addFavoriteButton.addEventListener('click', () => {
         const url = urlInput.value.trim();
-        if (url && !favorites.includes(url)) {
-            favorites.push(url);
+        if (url && !favorites[url]) {
+            favorites[url] = url;
             localStorage.setItem('favorites', JSON.stringify(favorites));
         }
     });
