@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loadURL = (url) => {
         // Display welcome page for https://cat-browser.cat
-        if (url === 'https://cat-browser.cat') {
+        if (url === 'https://cat-browser.cat' || url === 'https://cat-browser.cat/') {
             welcomePage.classList.remove('hidden');
             favoritesPage.classList.add('hidden');
             iframe.classList.add('hidden');
@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Display favorites page for https://favorites.cat-browser.cat
-        if (url === 'https://favorites.cat-browser.cat') {
+        // Display favorites page for https://favorites.cat-browser.cat or https://favorites.cat-browser.cat/
+        if (url === 'https://favorites.cat-browser.cat' || url === 'https://favorites.cat-browser.cat/') {
             favoritesPage.classList.remove('hidden');
             welcomePage.classList.add('hidden');
             iframe.classList.add('hidden');
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     goButton.addEventListener('click', () => {
-        const url = urlInput.value;
+        const url = urlInput.value.trim();
         loadURL(url);
         updateHistory(url);
     });
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     addFavoriteButton.addEventListener('click', () => {
-        const url = urlInput.value;
+        const url = urlInput.value.trim();
         if (url && !favorites.includes(url)) {
             favorites.push(url);
             localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     iframe.addEventListener('load', () => {
-        if (iframe.contentDocument.body.innerHTML.includes('X-Frame-Options')) {
+        if (iframe.contentDocument && iframe.contentDocument.body.innerHTML.includes('X-Frame-Options')) {
             errorMessage.classList.remove('hidden');
             iframe.classList.add('hidden');
         } else {
