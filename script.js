@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.getElementById('error-message');
     const favoritesList = document.getElementById('favorites-list');
     const favoritesContainer = document.getElementById('favorites');
+    const welcomePage = document.getElementById('welcome-page');
 
     let historyStack = [];
     let currentHistoryIndex = -1;
@@ -20,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.src = url;
         urlInput.value = url;
         errorMessage.classList.add('hidden');
+        welcomePage.classList.add('hidden');
+        iframe.classList.remove('hidden');
     };
 
     const updateHistory = (url) => {
@@ -101,7 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.classList.add('hidden');
     });
 
-    // Load initial blank page and favorites
-    loadURL('about:blank');
+    // Load initial welcome page and favorites
+    welcomePage.classList.remove('hidden');
+    iframe.classList.add('hidden');
     updateFavorites();
 });
