@@ -6,46 +6,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const addFavoriteButton = document.getElementById('add-favorite');
     const iframe = document.getElementById('webpage');
     const errorMessage = document.getElementById('error-message');
-    const favoritesList = document.getElementById('favorites-list');
-    const favoritesPage = document.getElementById('favorites-page');
-    const welcomePage = document.getElementById('welcome-page');
 
     let historyStack = [];
     let currentHistoryIndex = -1;
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     const loadURL = (url) => {
-        // Normalize the URL to handle different cases
-        url = url.toLowerCase().trim();
-
-        // Handle the special URL for the favorites page
         if (url === 'https://favorites.cat-browser.cat' || url === 'https://favorites.cat-browser.cat/') {
-            welcomePage.classList.add('hidden');
-            favoritesPage.classList.remove('hidden');
-            iframe.classList.add('hidden');
-            errorMessage.classList.add('hidden');
-            updateFavorites();
+            window.location.href = 'favorites.html'; // Redirect to favorites page
             return;
         }
 
-        // Handle the special URL for the welcome page
         if (url === 'https://cat-browser.cat' || url === 'https://cat-browser.cat/') {
-            welcomePage.classList.remove('hidden');
-            favoritesPage.classList.add('hidden');
-            iframe.classList.add('hidden');
-            errorMessage.classList.add('hidden');
+            // Optionally handle the welcome page logic
             return;
         }
 
-        // Load other URLs
         if (!url.startsWith('http://') && !url.startsWith('https://')) {
             url = 'http://' + url;
         }
         iframe.src = url;
         urlInput.value = url;
         errorMessage.classList.add('hidden');
-        welcomePage.classList.add('hidden');
-        favoritesPage.classList.add('hidden');
         iframe.classList.remove('hidden');
     };
 
@@ -55,22 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         historyStack.push(url);
         currentHistoryIndex++;
-    };
-
-    const updateFavorites = () => {
-        favoritesList.innerHTML = '';
-        favorites.forEach(fav => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = '#';
-            a.textContent = fav;
-            a.addEventListener('click', () => {
-                loadURL(fav);
-                updateHistory(fav);
-            });
-            li.appendChild(a);
-            favoritesList.appendChild(li);
-        });
     };
 
     goButton.addEventListener('click', () => {
@@ -98,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (url && !favorites.includes(url)) {
             favorites.push(url);
             localStorage.setItem('favorites', JSON.stringify(favorites));
-            updateFavorites();
         }
     });
 
@@ -122,7 +87,4 @@ document.addEventListener('DOMContentLoaded', () => {
         errorMessage.classList.remove('hidden');
         iframe.classList.add('hidden');
     });
-
-    // Load initial welcome page and favorites
-    loadURL('https://cat-browser.cat');  // Initial load to show the welcome page
 });
