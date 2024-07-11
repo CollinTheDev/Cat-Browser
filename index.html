@@ -3,31 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cat Browser - Home</title>
+    <title>Cat Browser</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="browser">
-        <div class="navbar">
-            <button id="back" class="nav-button">⬅️</button>
-            <button id="forward" class="nav-button">➡️</button>
-            <input type="text" id="url" placeholder="Enter URL" value="https://cat-browser.cat">
-            <button id="go" class="nav-button">Go</button>
-            <button id="add-favorite" class="nav-button">⭐</button>
-        </div>
-        <div class="content">
-            <iframe id="webpage"></iframe>
-            <div id="welcome-page">
-                <h1>Welcome to Cat Browser</h1>
-                <p>Your favorite browser for browsing cat-related content!</p>
-            </div>
-            <div id="error-message" class="hidden">This site cannot be embedded in an iframe.</div>
-            <div id="favorites-page" class="hidden">
-                <h2>Favorites</h2>
-                <ul id="favorites-list"></ul>
-            </div>
-        </div>
-    </div>
+    <header>
+        <h1>Cat Browser</h1>
+        <input type="text" id="url" placeholder="Enter URL">
+        <button id="go">Go</button>
+        <button id="back">Back</button>
+        <button id="forward">Forward</button>
+        <button id="add-favorite">Add to Favorites</button>
+    </header>
+    <main>
+        <iframe id="webpage" src="" frameborder="0"></iframe>
+        <div id="error-message" class="hidden">This site cannot be displayed in an iframe.</div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
