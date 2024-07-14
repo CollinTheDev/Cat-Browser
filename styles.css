@@ -1,101 +1,114 @@
-/* General styling for the entire application */
+/* General styles for Cat Browser */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #e0f7e9;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
-    color: #333;
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Ensure the body takes full viewport height */
+    height: 100vh;
 }
 
 header {
-    background-color: #282c34;
-    color: white;
-    padding: 15px;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #4caf50;
+    border-bottom: 2px solid #388e3c;
 }
 
 header h1 {
     margin: 0;
+    color: #fff;
+    font-size: 24px;
 }
 
-header input[type="text"] {
-    padding: 8px;
-    width: 60%;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+header input {
+    flex-grow: 1;
+    margin: 0 10px;
+    padding: 10px;
+    border: 2px solid #388e3c;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
-header button {
-    padding: 8px 12px;
-    margin: 0 5px;
+header button,
+header a {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background-color: #388e3c;
+    color: #fff;
     border: none;
-    border-radius: 4px;
-    background-color: #61dafb;
-    color: white;
+    border-radius: 5px;
+    text-decoration: none;
     cursor: pointer;
 }
 
-header button:hover {
-    background-color: #21a1f1;
-}
-
-header a {
-    color: #61dafb;
-    text-decoration: none;
-}
-
+header button:hover,
 header a:hover {
-    text-decoration: underline;
+    background-color: #66bb6a;
 }
 
 main {
-    padding: 80px 20px 20px; /* Offset by header height */
-    flex: 1; /* Allow main to take up remaining space */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    background-color: #e0f7e9;
 }
 
 iframe {
-    flex: 1; /* Ensure iframe takes up available space */
+    flex-grow: 1;
     width: 100%;
     border: none;
-}
-
-#error-message {
-    color: red;
-    margin-top: 10px;
 }
 
 .hidden {
     display: none;
 }
 
-/* Styles for the favorites page */
-#favorites-list {
-    list-style: none;
-    padding: 0;
+#error-message {
+    color: red;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
-#favorites-list li {
+/* Styles for settings page */
+main {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+h2 {
+    margin-top: 0;
+    color: #388e3c;
+}
+
+input[type="text"] {
+    width: 100%;
     padding: 10px;
-    border-bottom: 1px solid #ccc;
+    margin: 10px 0;
+    border: 2px solid #388e3c;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
-#favorites-list li a {
-    color: #61dafb;
-    text-decoration: none;
-    font-size: 16px;
+button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #388e3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-#favorites-list li a:hover {
-    text-decoration: underline;
+button:hover {
+    background-color: #66bb6a;
+}
+
+#code-message {
+    margin-top: 10px;
+    color: #388e3c;
 }
