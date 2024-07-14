@@ -6,6 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const addFavoriteButton = document.getElementById('add-favorite');
     const iframe = document.getElementById('webpage');
     const errorMessage = document.getElementById('error-message');
+    const settingsIcon = document.getElementById('settings-icon');
+    const settingsModal = document.getElementById('settings-modal');
+    const closeButton = document.querySelector('.close-button');
+    const submitCodeButton = document.getElementById('submit-code');
+    const accessCodeInput = document.getElementById('access-code');
+    const codeMessage = document.getElementById('code-message');
 
     let historyStack = [];
     let currentHistoryIndex = -1;
@@ -94,5 +100,33 @@ document.addEventListener('DOMContentLoaded', () => {
     iframe.addEventListener('error', () => {
         errorMessage.classList.remove('hidden');
         iframe.classList.add('hidden');
+    });
+
+    // Handle settings modal
+    settingsIcon.addEventListener('click', () => {
+        settingsModal.classList.remove('hidden');
+    });
+
+    closeButton.addEventListener('click', () => {
+        settingsModal.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === settingsModal) {
+            settingsModal.classList.add('hidden');
+        }
+    });
+
+    submitCodeButton.addEventListener('click', () => {
+        const code = accessCodeInput.value.trim();
+        if (code === 'staff6924' || code === 'prem9024') {
+            codeMessage.textContent = 'Access granted!';
+            codeMessage.style.color = 'green';
+            codeMessage.classList.remove('hidden');
+        } else {
+            codeMessage.textContent = 'Invalid code. Please try again.';
+            codeMessage.style.color = 'red';
+            codeMessage.classList.remove('hidden');
+        }
     });
 });
