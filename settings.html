@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings - Cat Browser</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" id="theme-link">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -17,6 +17,13 @@
         <input type="text" id="access-code" placeholder="Enter your code">
         <button id="submit-code">Submit</button>
         <p id="code-message" class="hidden"></p>
+
+        <!-- Theme customization section -->
+        <div id="theme-selection" class="hidden">
+            <h2>Select Theme</h2>
+            <button class="theme-button" data-theme="styles.css">Green Theme</button>
+            <button class="theme-button" data-theme="theme-dark.css">Dark Theme</button>
+        </div>
     </main>
     <script src="settings.js"></script>
 </body>
