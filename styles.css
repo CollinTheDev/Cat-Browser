@@ -24,8 +24,7 @@ header h1 {
     font-size: 24px;
 }
 
-header input {
-    flex-grow: 1;
+header input[type="text"] {
     margin: 0 10px;
     padding: 10px;
     border: 2px solid #388e3c;
@@ -74,41 +73,26 @@ iframe {
     background-color: rgba(255, 255, 255, 0.8);
 }
 
-/* Styles for settings page */
-main {
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
+/* Google Custom Search Engine Styles */
+.gcse-search {
+    margin: 10px;
+    max-width: 100%;
 }
 
-h2 {
-    margin-top: 0;
-    color: #388e3c;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+.gcse-search .gsc-input {
     border: 2px solid #388e3c;
     border-radius: 5px;
-    box-sizing: border-box;
+    padding: 5px;
 }
 
-button {
-    padding: 10px 15px;
-    margin-top: 10px;
+.gcse-search .gsc-search-button {
     background-color: #388e3c;
     color: #fff;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+    padding: 5px 10px;
 }
 
-button:hover {
+.gcse-search .gsc-search-button:hover {
     background-color: #66bb6a;
-}
-
-#code-message {
-    margin-top: 10px;
-    color: #388e3c;
 }
