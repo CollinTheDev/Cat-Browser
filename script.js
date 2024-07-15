@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchForm = document.getElementById('search-form');
     const searchQueryInput = document.getElementById('search-query');
 
+    // Load and apply saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.getElementById('theme-link').href = savedTheme;
+    }
+
     // Handle URL navigation
     goButton.addEventListener('click', () => {
         const url = urlInput.value.trim();
