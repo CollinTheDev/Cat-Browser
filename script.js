@@ -1,132 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const urlInput = document.getElementById('url');
     const goButton = document.getElementById('go');
     const backButton = document.getElementById('back');
     const forwardButton = document.getElementById('forward');
     const addFavoriteButton = document.getElementById('add-favorite');
+    const urlInput = document.getElementById('url');
     const iframe = document.getElementById('webpage');
     const errorMessage = document.getElementById('error-message');
-    const settingsIcon = document.getElementById('settings-icon');
-    const settingsModal = document.getElementById('settings-modal');
-    const closeButton = document.querySelector('.close-button');
-    const submitCodeButton = document.getElementById('submit-code');
-    const accessCodeInput = document.getElementById('access-code');
-    const codeMessage = document.getElementById('code-message');
+    const searchForm = document.getElementById('search-form');
+    const searchQueryInput = document.getElementById('search-query');
 
-    let historyStack = [];
-    let currentHistoryIndex = -1;
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
-    let domains = JSON.parse(localStorage.getItem('domains')) || {};
-
-    const loadURL = (url) => {
-        if (url === 'https://favorites.cat-browser.cat' || url === 'https://favorites.cat-browser.cat/') {
-            window.location.href = 'favorites.html'; // Redirect to favorites page
-            return;
-        }
-
-        if (url === 'https://cat-browser.cat' || url === 'https://cat-browser.cat/') {
-            // Optionally handle the welcome page logic
-            return;
-        }
-
-        if (!url.startsWith('http://') && !url.startsWith('https://')) {
-            url = 'http://' + url;
-        }
-
-        // Check if the URL matches a custom domain
-        const domain = new URL(url).hostname;
-        if (domains[domain]) {
-            url = domains[domain];
-        }
-
-        iframe.src = url;
-        urlInput.value = url;
-        errorMessage.classList.add('hidden');
-        iframe.classList.remove('hidden');
-    };
-
-    const updateHistory = (url) => {
-        if (currentHistoryIndex < historyStack.length - 1) {
-            historyStack = historyStack.slice(0, currentHistoryIndex + 1);
-        }
-        historyStack.push(url);
-        currentHistoryIndex++;
-    };
-
+    // Handle URL navigation
     goButton.addEventListener('click', () => {
         const url = urlInput.value.trim();
-        loadURL(url);
-        updateHistory(url);
+        if (url) {
+            iframe.src = url;
+        }
     });
 
+    // Handle back navigation
     backButton.addEventListener('click', () => {
-        if (currentHistoryIndex > 0) {
-            currentHistoryIndex--;
-            loadURL(historyStack[currentHistoryIndex]);
-        }
+        iframe.contentWindow.history.back();
     });
 
+    // Handle forward navigation
     forwardButton.addEventListener('click', () => {
-        if (currentHistoryIndex < historyStack.length - 1) {
-            currentHistoryIndex++;
-            loadURL(historyStack[currentHistoryIndex]);
-        }
+        iframe.contentWindow.history.forward();
     });
 
+    // Handle adding to favorites
     addFavoriteButton.addEventListener('click', () => {
-        const url = urlInput.value.trim();
-        if (url && !favorites[url]) {
-            favorites[url] = url;
-            localStorage.setItem('favorites', JSON.stringify(favorites));
+        const url = iframe.src;
+        if (url) {
+            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            if (!favorites.includes(url)) {
+                favorites.push(url);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            }
         }
     });
 
-    urlInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            goButton.click();
+    // Handle Google search form submission
+    searchForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const query = searchQueryInput.value.trim();
+        if (query) {
+            iframe.src = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
         }
     });
 
+    // Handle iframe load error
     iframe.addEventListener('load', () => {
-        if (iframe.contentDocument && iframe.contentDocument.body.innerHTML.includes('X-Frame-Options')) {
-            errorMessage.classList.remove('hidden');
-            iframe.classList.add('hidden');
-        } else {
-            iframe.classList.remove('hidden');
-            errorMessage.classList.add('hidden');
-        }
+        errorMessage.classList.add('hidden');
     });
 
     iframe.addEventListener('error', () => {
         errorMessage.classList.remove('hidden');
-        iframe.classList.add('hidden');
-    });
-
-    // Handle settings modal
-    settingsIcon.addEventListener('click', () => {
-        settingsModal.classList.remove('hidden');
-    });
-
-    closeButton.addEventListener('click', () => {
-        settingsModal.classList.add('hidden');
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === settingsModal) {
-            settingsModal.classList.add('hidden');
-        }
-    });
-
-    submitCodeButton.addEventListener('click', () => {
-        const code = accessCodeInput.value.trim();
-        if (code === 'staff6924' || code === 'prem9024') {
-            codeMessage.textContent = 'Access granted!';
-            codeMessage.style.color = 'green';
-            codeMessage.classList.remove('hidden');
-        } else {
-            codeMessage.textContent = 'Invalid code. Please try again.';
-            codeMessage.style.color = 'red';
-            codeMessage.classList.remove('hidden');
-        }
     });
 });
