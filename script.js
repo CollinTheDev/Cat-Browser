@@ -6,14 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlInput = document.getElementById('url');
     const iframe = document.getElementById('webpage');
     const errorMessage = document.getElementById('error-message');
-    const searchForm = document.getElementById('search-form');
-    const searchQueryInput = document.getElementById('search-query');
+    const userId = 'defaultUser';  // Replace with actual user management if needed
 
     // Load and apply saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        document.getElementById('theme-link').href = savedTheme;
-    }
+    db.collection('users').doc(userId).get().then((doc) => {
+        if (doc.exists) {
+            const data = doc.data();
+            if (data.theme) {
+                document.getElementById('theme-link').href = data.theme;
+            }
+        }
+    });
 
     // Handle URL navigation
     goButton.addEventListener('click', () => {
@@ -37,20 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     addFavoriteButton.addEventListener('click', () => {
         const url = iframe.src;
         if (url) {
-            let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-            if (!favorites.includes(url)) {
-                favorites.push(url);
-                localStorage.setItem('favorites', JSON.stringify(favorites));
-            }
-        }
-    });
-
-    // Handle Google search form submission
-    searchForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const query = searchQueryInput.value.trim();
-        if (query) {
-            iframe.src = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            db.collection('users').doc(userId).update({
+                favorites: firebase.firestore.FieldValue.arrayUnion(url)
+            });
         }
     });
 
