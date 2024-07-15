@@ -6,6 +6,22 @@
     <title>Settings - Cat Browser</title>
     <link rel="stylesheet" href="styles.css" id="theme-link">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAOK2H7XklP-_ng407mj___hy3Fy9InNtk",
+            authDomain: "bettercord-e4e7d.firebaseapp.com",
+            projectId: "bettercord-e4e7d",
+            storageBucket: "bettercord-e4e7d.appspot.com",
+            messagingSenderId: "934430756781",
+            appId: "1:934430756781:web:faedd45b79251803721b24"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+    </script>
 </head>
 <body>
     <header>
